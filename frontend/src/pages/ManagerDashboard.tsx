@@ -39,10 +39,11 @@ const ManagerDashboard: React.FC = () => {
 
     const handleUpdate = async (values: any) => {
         try {
-            const res = await axios.patch(`/api/tasks/${selectedTask?._id}`, values, {
+            const res = await axios.patch(`http://localhost:5000/api/tasks/${selectedTask?._id}`, values, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setTasks(prev => prev.map(task => task._id === res.data._id ? res.data : task));
+            alert('Task updated successfully')
             setShowModal(false);
             setSelectedTask(null);
         } catch (err) {
@@ -52,24 +53,15 @@ const ManagerDashboard: React.FC = () => {
 
     const handleDelete = async (id: string) => {
         try {
-            await axios.delete(`/api/tasks/${id}`, {
+            await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setTasks(prev => prev.filter(task => task._id !== id));
+            alert('Deleted successfully')
         } catch (err) {
             console.error('Failed to delete task', err);
         }
     };
-
-    //   useEffect(() => {
-    //     fetchAssignedTasks();
-    //     socket.on('newTask', (newTask: Task) => {
-    //       setTasks(prev => [...prev, newTask]);
-    //     });
-    //     return () => {
-    //       socket.off('newTask');
-    //     };
-    //   }, []);
 
     useEffect(() => {
         fetchAssignedTasks();
@@ -127,19 +119,46 @@ const ManagerDashboard: React.FC = () => {
                     <h2>📋 Manager Dashboard</h2>
                     <div className="d-flex justify-content-between align-items-center my-3">
                         <h5>Assigned Tasks</h5>
-                        <button onClick={() => setShowModal(true)} className="btn btn-primary btn-sm">
+                        <button onClick={() => { setSelectedTask(null); setShowModal(true) }} className="btn btn-primary btn-sm">
                             ➕ Assign New Task
                         </button>
                     </div>
 
-                    {showModal && (
+                    {/* {showModal && (
                         <AssignTaskModal
                             onClose={() => setShowModal(false)}
                             onSuccess={fetchAssignedTasks}
                             task={selectedTask}
                             onUpdate={handleUpdate}
                         />
-                    )}
+                    )} */}
+
+
+                    {showModal && selectedTask ? (
+                        // Edit mode
+                        <AssignTaskModal
+                            initialValues={{
+                                title: selectedTask.title,
+                                description: selectedTask.description,
+                                status: selectedTask.status,
+                                assignedTo: '', // Optional: prefill if needed
+                            }}
+                            onClose={() => {
+                                setSelectedTask(null);
+                                setShowModal(false);
+                            }}
+                            onSubmit={handleUpdate}
+                        />
+                    ) : showModal ? (
+                        // Create mode
+                        <AssignTaskModal
+                            onClose={() => setShowModal(false)}
+                            onSuccess={fetchAssignedTasks}
+                        />
+                    ) : null}
+
+
+
 
                     {loading ? (
                         <p>Loading tasks...</p>
