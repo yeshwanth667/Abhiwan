@@ -35,20 +35,20 @@ Designed to simulate a real-world task collaboration tool with scalable architec
 
 ### 👨‍💼 Manager Dashboard
 - Assign new tasks to employees.
-- 
+  
 - Edit/update existing tasks.
-- 
+  
 - Delete tasks.
-- 
+  
 - View all assigned tasks.
-- 
+  
 - Real-time sync via **Socket.IO**.
 
 ### 👷 Employee Dashboard
 - View only assigned tasks.
-- 
+  
 - Update task status (`Pending`, `In Progress`, `Completed`).
-- 
+  
 - Real-time updates when manager adds or updates tasks.
 
 ### Employee Login
@@ -89,6 +89,7 @@ Clone the repo
 	git clone https://github.com/yeshwanth667/Abhiwan.git
 
 **🛠 Setup Backend**
+
 	cd backend
  
 	npm install
@@ -96,6 +97,7 @@ Clone the repo
 	npm run dev
 
 **⚛️ Setup Frontend**
+
 	cd client
  
 	npm install
