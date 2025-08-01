@@ -200,7 +200,7 @@ const TaskList: React.FC = () => {
                       disabled={!dirtyStatus[task._id]}
                       onClick={() => handleEditClick(task._id)}
                     >
-                      Edit
+                      Edit and Save
                     </button>
                   </td>
                 </tr>
