@@ -9,10 +9,15 @@ Collaborative To-Do App is a role-based task management system built for organiz
 
 The project features:
 Authentication & Authorization (JWT-based)
+
 Role-based dashboards for Manager and Employee
+
 Real-time updates using Socket.IO
+
 Responsive UI built with React, TypeScript, Bootstrap
+
 RESTful API with Express.js and MongoDB
+
 Designed to simulate a real-world task collaboration tool with scalable architecture, intuitive UI, and production-ready deployment on Vercel (frontend) and Render (backend).
 
 ## 📂 Project Structure
