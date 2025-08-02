@@ -98,7 +98,7 @@ Clone the repo
 
 **⚛️ Setup Frontend**
 
-	cd client
+	cd frontend
  
 	npm install
  
